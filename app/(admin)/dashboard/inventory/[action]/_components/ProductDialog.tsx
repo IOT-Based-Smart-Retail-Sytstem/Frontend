@@ -59,7 +59,7 @@ export function ProductDialog({
       try {
         const res = await getProduct(id);
         const product = res?.data.data;
-        console.log(product);
+        // console.log(product);
         const values = {
             title: product.title,
             description: product.description,
@@ -95,12 +95,6 @@ export function ProductDialog({
     loadProductInfo();
   }, [id]);
 
-  // console.log(product);
-  // const getStockStatus = (stock: number) => {
-  //   if (stock <= 50) return "OUT";
-  //   if (stock <= 100) return "LOW";
-  //   return "AVAILABLE";
-  // };
 
   if (loading) {
     return <FormComponentSkeleton />;

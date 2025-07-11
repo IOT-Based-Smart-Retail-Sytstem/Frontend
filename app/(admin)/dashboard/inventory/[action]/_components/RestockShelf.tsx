@@ -36,6 +36,8 @@ export function RestockShelf({
 
   const handleRestock = async () => {
     // if (newQuantity > 0 && newQuantity <= maxStock - currentStock) {
+    console.log({ newQuantity });
+
     if (newQuantity > 0 && newQuantity <= 400) {
       const res = await restock(productId, { stock: newQuantity });
       console.log({ res });

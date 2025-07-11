@@ -18,7 +18,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 import {
   Button,
   DropdownMenu,
@@ -350,41 +350,41 @@ export function ProductTable() {
     setOutItems(data.filter((itm) => itm.stockState === "out").length);
   }, [data]);
 
-  const SOCKET_URL =
-    "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf";
+  // const SOCKET_URL =
+  //   "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf";
 
-  useEffect(() => {
-    const socket = io(SOCKET_URL, {
-      transports: ["websocket"],
-    });
+  // useEffect(() => {
+  //   const socket = io(SOCKET_URL, {
+  //     transports: ["websocket"],
+  //   });
 
-    socket.on("connect", () => {
-      console.log("🔗 Connected to shelf socket: ", socket.id);
-    });
+  //   socket.on("connect", () => {
+  //     console.log("🔗 Connected to shelf socket: ", socket.id);
+  //   });
 
-    socket.on("shelf-state-update", (response) => {
-      if (response.success) {
-        const updatedProduct = response.product;
-        setProducts((prevProducts) =>
-          prevProducts.map((product) =>
-            product._id === updatedProduct._id
-              ? { ...product, stockState: updatedProduct.shelfState }
-              : product
-          )
-        );
-      } else {
-        console.error("Shelf update failed:", response);
-      }
-    });
+  //   socket.on("shelf-state-update", (response) => {
+  //     if (response.success) {
+  //       const updatedProduct = response.product;
+  //       setProducts((prevProducts) =>
+  //         prevProducts.map((product) =>
+  //           product._id === updatedProduct._id
+  //             ? { ...product, stockState: updatedProduct.shelfState }
+  //             : product
+  //         )
+  //       );
+  //     } else {
+  //       console.error("Shelf update failed:", response);
+  //     }
+  //   });
 
-    socket.on("disconnect", () => {
-      console.log("Disconnected from shelf socket");
-    });
+  //   socket.on("disconnect", () => {
+  //     console.log("Disconnected from shelf socket");
+  //   });
 
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
