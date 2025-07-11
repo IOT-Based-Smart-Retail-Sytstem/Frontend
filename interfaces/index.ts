@@ -84,7 +84,6 @@ export interface IProductInfo {
     subCategoryId: string;
     item_weight?: string;
     shelfNumber: number;
-    stockState: string;
 }
 
 export interface IProduct {
