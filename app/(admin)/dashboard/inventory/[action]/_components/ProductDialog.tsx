@@ -39,6 +39,7 @@ export function ProductDialog({
     discount: 0,
     barcode: "",
     stock: 0,
+    stockState: "",
     brand: "",
     category: "",
     categoryId: "",
@@ -60,22 +61,23 @@ export function ProductDialog({
         const product = res?.data.data;
         console.log(product);
         const values = {
-          title: product.title,
-          description: product.description,
-          highlights: product.highlights,
-          image_url: product.image_url,
-          price: product.price,
-          discount: product.discount,
-          discountType: product.discountType,
-          barcode: product.barcode,
-          stock: product.stock,
-          brand: product.brand,
-          category: product.category.name,
-          subCategory: product.subCategory.name,
-          categoryId: product.category.name,
-          subCategoryId: product.subCategory.name,
-          shelfNumber: product.shelfNumber,
-          item_weight: product.item_weight,
+            title: product.title,
+            description: product.description,
+            highlights: product.highlights,
+            image_url: product.image_url,
+            price: product.price,
+            discount: product.discount,
+            discountType: product.discountType,
+            barcode: product.barcode,
+            stock: product.stock,
+            stockState: product.stockState,
+            brand: product.brand,
+            category: product.category.name,
+            subCategory: product.subCategory.name,
+            categoryId: product.category.name,
+            subCategoryId: product.subCategory.name,
+            shelfNumber: product.shelfNumber,
+            item_weight: product.item_weight,
         };
 
         setProduct(values);
@@ -94,11 +96,11 @@ export function ProductDialog({
   }, [id]);
 
   // console.log(product);
-  const getStockStatus = (stock: number) => {
-    if (stock <= 50) return "OUT";
-    if (stock <= 100) return "LOW";
-    return "AVAILABLE";
-  };
+  // const getStockStatus = (stock: number) => {
+  //   if (stock <= 50) return "OUT";
+  //   if (stock <= 100) return "LOW";
+  //   return "AVAILABLE";
+  // };
 
   if (loading) {
     return <FormComponentSkeleton />;
@@ -275,9 +277,9 @@ export function ProductDialog({
                       </span>
                       <span
                         className={`${
-                          getStockStatus(product.stock) == "LOW"
+                          product.stockState === "low"
                             ? "text-[#F99141] bg-[#FFF3E9]"
-                            : getStockStatus(product.stock) == "OUT"
+                            : product.stockState === "out"
                             ? "text-[#ED1C24] bg-[#FFEDED]"
                             : "text-[#24A855] bg-[#DBFFEB]"
                         } 
@@ -286,9 +288,9 @@ export function ProductDialog({
                         <Image
                           className={``}
                           src={`${
-                            getStockStatus(product.stock) == "LOW"
+                            product.stockState === "low"
                               ? "/images/inventoryLowOfStock.svg"
-                              : getStockStatus(product.stock) == "OUT"
+                              : product.stockState === "out"
                               ? "/images/inventoryOutofStock.svg"
                               : "/images/inventoryAvailableProducts.svg"
                           }`}
@@ -298,7 +300,7 @@ export function ProductDialog({
                         />
                         <span>
                           {product.stock} pieces (
-                          {getStockStatus(product.stock).toLowerCase()} stock)
+                          {product.stockState} stock)
                         </span>
                       </span>
                     </div>

@@ -76,6 +76,7 @@ export interface IProductInfo {
     discountType?: string;
     barcode: string;
     stock: number;
+    stockState?: string;
     brand: string;
     category?: string;
     subCategory?: string;
